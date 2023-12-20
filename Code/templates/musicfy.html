@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        background-color: rgb(4, 4, 4);
+      }
+      #clip {
+        backdrop-filter: blur(20px);
+        margin-top: 10vh;
+        width: 300px;
+        height: 500px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 2px 5px 50px 10px rgb(188, 145, 152);
+        color: rgb(4, 4, 4);
+        border-radius: 10px;
+        font-family: "Satisfy", cursive;
+      }
+      #login {
+        /* background-color: #27c4f5; */
+        background-color: #1ed760;
+        width: 250px;
+        border: none;
+        border-radius: 10px;
+        height: 30px;
+        color: rgb(10, 10, 10);
+        animation: slide 4s;
+        position: relative;
+        transition: 0.4s;
+      }
+      @keyframes slide {
+        0% {
+          background-color: red;
+          left: 0px;
+          top: 0px;
+        }
+        25% {
+          background-color: blue;
+          left: 20em;
+          top: 0px;
+        }
+        50% {
+          background-color: red;
+          left: 0px;
+          top: 0px;
+        }
+        75% {
+          background-color: blue;
+          left: -20em;
+          top: 0px;
+        }
+        100% {
+          background-color: red;
+          left: 0px;
+          top: 0px;
+        }
+      }
+
+      /* img {
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+      } */
+      .image {
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+      }
+      #b,
+      #email {
+        width: auto;
+        height: 30px;
+        /* padding-left: 70px; */
+        border-radius: 5.5px;
+      }
+      .main {
+        display: flex;
+        justify-content: center;
+      }
+      .loginimage {
+        margin-top: 10vh;
+
+        height: 500px;
+
+        border-radius: 10px;
+      }
+      .label {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .Forget {
+        color: #080808;
+        font-family: var(
+          --font-family,
+          CircularSp,
+          CircularSp-Arab,
+          CircularSp-Hebr,
+          CircularSp-Cyrl,
+          CircularSp-Grek,
+          CircularSp-Deva,
+          var(--fallback-fonts, sans-serif)
+        );
+      }
+      .Didnt {
+        color: rgb(5, 5, 5);
+      }
+    </style>
+  </head>
+  <body style="background-image: url(../static/background.png)">
+    <center>
+      <div class="main">
+        <div class="left">
+          <img
+            class="loginimage"
+            src="{{url_for('static', filename='1.png')}}"
+            alt=""
+            id="a"
+          />.
+        </div>
+        <div id="clip" style="background: rgba(255, 255, 255, 0.2)">
+          <h1>Login to Musicfy</h1>
+          <hr />
+          <br /><br />
+          <form action="/" method="post">
+            <label class="label" for="b">Email</label>
+            <input
+              style="
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 4px;
+                border: 1px solid grey;
+              "
+              required
+              type="text"
+              id="email"
+              name="email"
+              onkeyup="moving()"
+              placeholder="Email"
+            />
+            <br /><br />
+            <div>
+              <label class="label" for="b">Password</label>
+              <input
+                style="
+                  background: rgba(255, 255, 255, 0.2);
+                  border-radius: 4px;
+                  border: 1px solid grey;
+                "
+                required
+                type="text"
+                id="b"
+                name="b"
+                onkeyup="moving()"
+                placeholder="Password"
+              />
+              <br /><br /><br />
+              <div style="height: 30px">
+                <input type="submit" value="Login" id="login" />
+              </div>
+            </div>
+            <p><a href="#" class="Forget">Forget Password?</a></p>
+            <p><a class="Forget Didnt">Didnt have account?</a></p>
+          </form>
+          <!-- sign up button starts -->
+          <a href="/signup">
+            <div style="height: 30px">
+              <input
+                style="
+                  background: rgba(255, 255, 255, 0.2);
+                  border-radius: 4px;
+                  border: 1px solid rgba(255, 255, 255, 0.2);
+                  padding: 10px;
+                  width: 120px;
+                "
+                href="/signup"
+                type="submit"
+                value="Sign Up"
+                id="signup"
+              />
+            </div>
+          </a>
+          <!--sign up ends-->
+          <!-- Admin Login -->
+          <br />
+          <a href="/adminLogin">
+            <button
+              style="
+                padding: 3%;
+                cursor: pointer;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 4px;
+                border: 1px solid grey;
+              "
+            >
+              Admin Login
+            </button>
+          </a>
+        </div>
+      </div>
+    </center>
+
+    <script>
+      // function moving() {
+      //   if (b.value == "radhakrishna") {
+      //     // login.value = "correct Password";
+      //     login.style = "center";
+      //     login.style.backgroundColor = "red";
+
+      //     login.value = "hiii";
+      //     function slideover() {
+      //       button.style.marginLeft = `0`;
+      //     }
+      //     function slideout() {
+      //       button.style.marginRight = `0 `;
+      //     }
+      //     login.onmouseover = function () {
+      //       slideover();
+      //     };
+      //     login.onmouseout = function () {
+      //       slideout();
+      //     };
+      //   } else {
+      //     login.style.backgroundColor = "#27c4f5";
+
+      //     login.value = "Enter correct Password";
+      //     var button = document.getElementById("login");
+      //     function slideover() {
+      //       button.style.marginLeft = `-${Math.ceil(Math.random() * 500)}%`;
+      //     }
+      //     function slideout() {
+      //       button.style.marginRight = `-${Math.ceil(Math.random() * 500)}%`;
+      //     }
+      //     login.onmouseover = function () {
+      //       slideover();
+      //     };
+      //     login.onmouseout = function () {
+      //       slideout();
+      //     };
+      //   }
+      // }
+    </script>
+  </body>
+</html>

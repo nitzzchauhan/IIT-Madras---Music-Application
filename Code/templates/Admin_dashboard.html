@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - {{admin}}</title>
+    <style>
+      .figures {
+        display: flex;
+      }
+    </style>
+  </head>
+  <body style="background-image: url(../static/background.png)">
+    <div style="display: flex; justify-content: space-around">
+      <div
+        style="
+          background-color: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(4px);
+          padding: 25px;
+          border-radius: 8px;
+        "
+      >
+        <h1>Total Users</h1>
+        <p>{{totalusers}}</p>
+      </div>
+      <div
+        style="
+          background-color: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(4px);
+          padding: 25px;
+          border-radius: 8px;
+        "
+      >
+        <h1>Total Creator</h1>
+        <p>{{total_creators}}</p>
+      </div>
+      <div
+        style="
+          background-color: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(4px);
+          padding: 25px;
+          border-radius: 8px;
+        "
+      >
+        <h1>Total Albums</h1>
+        <p>{{total_Albums}}</p>
+      </div>
+      <div
+        style="
+          background-color: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(4px);
+          padding: 25px;
+          border-radius: 8px;
+        "
+      >
+        <h1>Total General Users</h1>
+        <p>{{totalusers}}</p>
+      </div>
+      <div
+        style="
+          background-color: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(4px);
+          padding: 25px;
+          border-radius: 8px;
+        "
+      >
+        <h1>Total Songs</h1>
+        <p>{{total_songs}}</p>
+      </div>
+    </div>
+
+    <!-- all songs div starts-->
+    <center>
+      <br /><br />
+      <a
+        href="/upload"
+        style="
+          font-size: larger;
+          text-decoration: none;
+          display: block;
+          border: 1px solid rgb(11, 11, 11);
+          padding: 30px;
+          background-color: rgba(255, 255, 255, 0.2);
+        "
+        >Upload Songs</a
+      >
+      <br />
+      <br />
+      <h1>Song Management</h1>
+      <div
+        class="allSongsDiv"
+        style="
+          background-color: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(4px);
+          padding: 25px;
+          border-radius: 8px;
+        "
+      >
+        <table
+          id="songTable"
+          border="5"
+          cellspacing="4"
+          style="border: 1px solid grey"
+          class="tablesong"
+        >
+          <thead>
+            <tr>
+              <th scope="col">Song Id</th>
+              <th scope="col">Title</th>
+              <th scope="col">Artist</th>
+              <th scope="col">Album</th>
+              <th scope="col">Genre</th>
+              <th scope="col">Updated At</th>
+              <th scope="col">Created At</th>
+              <th scope="col">Lyrics</th>
+              <th scope="col">Delete Songs</th>
+            </tr>
+          </thead>
+          <tbody v-for="song in songList" :key="song.id">
+            {% for song in song %}
+            <tr>
+              <td>{{song.song_id}}</td>
+              <td>{{song.title}}</td>
+              <td>{{song.artist}}</td>
+              <td>{{song.album}}</td>
+              <td>{{song.genre}}</td>
+              <td>{{song.duration}}</td>
+              <td>{{song.song_date}}</td>
+              <td id="lyrics" style="max-height: 50px; overflow: vv">
+                <button class="btn btn-danger" onclick="showeditor()">
+                  Edit lyrics
+                </button>
+                <form
+                  action="{{ url_for('home', song_id=song.song_id)}}"
+                  method="post"
+                >
+                  <textarea
+                    id="editor"
+                    value="{{song.lyrics}}"
+                    style="display: none"
+                  >
+{{song.lyrics}}</textarea
+                  >
+                  <button
+                    onclick="updateLyrics()"
+                    id="saveedit"
+                    style="display: none"
+                  >
+                    Save Changes
+                  </button>
+                </form>
+                <!-- {{song.lyrics}} -->
+              </td>
+              <td>
+                <form
+                  action="{{ url_for('deletesong', song_id=song.song_id)}}"
+                  method="post"
+                >
+                  <button class="btn btn-danger">Delete Song</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <h1>All User Management</h1>
+      <div
+        class="allusers"
+        style="
+          background-color: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(4px);
+          padding: 25px;
+          border-radius: 8px;
+        "
+      >
+        <table
+          id="songTable"
+          border="5"
+          cellspacing="4"
+          style="border: 1px solid grey"
+          class="tablesong"
+        >
+          <thead>
+            <tr>
+              <th scope="col">User Id</th>
+              <th scope="col">User Name</th>
+              <th scope="col">User Email</th>
+              <th scope="col">User Password</th>
+              <th scope="col">Delete User</th>
+            </tr>
+          </thead>
+          <tbody v-for="user in users" :key="song.id">
+            {% for user in users %}
+            <tr>
+              <td>{{user.user_id}}</td>
+              <td>{{user.user_name}}</td>
+              <td>{{user.user_email}}</td>
+              <td>{{user.user_password}}</td>
+
+              <td>
+                <form
+                  action="{{ url_for('deleteUser', user_id=user.user_id)}}"
+                  method="post"
+                >
+                  <button class="btn btn-danger">Delete user</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <h1>All Creator Management</h1>
+      <div
+        class="allusers"
+        style="
+          background-color: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(4px);
+          padding: 25px;
+          border-radius: 8px;
+        "
+      >
+        <table
+          id="songTable"
+          border="5"
+          cellspacing="4"
+          style="border: 1px solid grey"
+          class="tablesong"
+        >
+          <thead>
+            <tr>
+              <th scope="col">User Id</th>
+              <th scope="col">Creator Id</th>
+              <th scope="col">User Name</th>
+              <th scope="col">User Email</th>
+              <th scope="col">User Password</th>
+              <th scope="col">Delete User</th>
+              <th scope="col">Status</th>
+
+            </tr>
+          </thead>
+          <tbody v-for="user in users" :key="song.id">
+            {% for user in users %} {% for creator in all_creators %} {% if
+            user.user_id == creator.user_id %}
+            <tr>
+              <td>{{user.user_id}}</td>
+              <td>{{creator.creator_id}}</td>
+              <td>{{user.user_name}}</td>
+              <td>{{user.user_email}}</td>
+              <td>{{user.user_password}}</td>
+              <td>
+                <form
+                  action="{{ url_for('deleteCreator', creator_id=creator.creator_id)}}"
+                  method="post"
+                >
+                  <button class="btn btn-danger">Delete Creator</button>
+                </form>
+              </td>
+              <td>
+<select name="" id="">
+  <option value="">None</option>
+  <option value="">Whitelist</option>
+  <option value="">Blacklist</option>
+</td>
+  
+</select>
+
+            </tr>
+            {% endif %} {% endfor %} {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <h1>All Album Management</h1>
+      <div
+        class="allalbums"
+        style="
+          background-color: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(4px);
+          padding: 25px;
+          border-radius: 8px;
+        "
+      >
+        <table
+          id="albumTable"
+          border="5"
+          cellspacing="4"
+          style="border: 1px solid grey"
+          class="tablesong"
+        >
+          <thead>
+            <tr>
+              <th scope="col">Album Id</th>
+              <th scope="col">Creator Id</th>
+              <th scope="col">Album Name</th>
+              <th scope="col">Album Date</th>
+              <th scope="col">Delete Album</th>
+            </tr>
+          </thead>
+          <tbody v-for="user in users" :key="song.id">
+            {% for album in all_Albums %}
+            <tr>
+              <td>{{album.album_id}}</td>
+              <td>{{album.creator_id}}</td>
+              <td>{{album.title}}</td>
+              <td>{{album.album_date}}</td>
+              <td>
+                <form
+                  action="{{ url_for('deleteAlbum', album_id=album.album_id)}}"
+                  method="post"
+                >
+                  <button class="btn btn-danger">Delete Album</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <h1>All Playlist Management</h1>
+      <div
+        class="allalbums"
+        style="
+          background-color: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(4px);
+          padding: 25px;
+          border-radius: 8px;
+        "
+      >
+        <table
+          id="albumTable"
+          border="5"
+          cellspacing="4"
+          style="border: 1px solid grey"
+          class="tablesong"
+        >
+          <thead>
+            <tr>
+              <th scope="col">Playlist Id</th>
+              <th scope="col">Playlist Name</th>
+              <th scope="col">Delete Playlist</th>
+            </tr>
+          </thead>
+          <tbody v-for="user in users" :key="song.id">
+            {% for Playlist in all_playlist %}
+            <tr>
+              <td>{{Playlist.Playlist_id}}</td>
+              <td>{{Playlist.name}}</td>
+
+              <td>
+                <form
+                  action="{{ url_for('deletePlaylist', Playlist_id=Playlist.Playlist_id)}}"
+                  method="post"
+                >
+                  <button class="btn btn-danger">Delete Playlist</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <a href="/adminlogout">Logout</a>
+    </center>
+    <!-- all songs div end-->
+  </body>
+  <script>
+    // Function to update the displayed lyrics
+    function showeditor() {
+      var editor = document.getElementById("editor");
+      var saveedit = document.getElementById("saveedit");
+
+      editor.style.display = "inline";
+      saveedit.style.display = "inline";
+    }
+    function updateLyrics() {
+      var lyricsDiv = document.getElementById("lyrics");
+      var editor = document.getElementById("editor");
+
+      // Update the lyrics content with the edited text
+      lyricsDiv.textContent = editor.value;
+    }
+  </script>
+</html>

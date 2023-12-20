@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Songs</title>
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+  <body>
+    <!-- full layout start -->
+    <div class="full_layout">
+      <!-- left layout start-------------------------------------------------------------------- -->
+      <div class="left_layout">
+        <!-- left layout starts -->
+        <div class="header">
+          <!-- left side-navbar starts -->
+          <div class="side-nav">
+            <!-- div class user -->
+            <div class="user">
+              <div>
+                <p>{{useremail}}</p>
+              </div>
+              <img src="..//static/Dashboard/star.png" class="star-img" />
+            </div>
+            <!-- div class user ends -->
+            <h4>All Playlist</h4>
+            <ul style="overflow: auto">
+              <li>
+                <img src="..//static/Dashboard/dashboard.png" />
+                <a href="/home"><p>Dashboard</p></a>
+              </li>
+              {% for pl in all_playlist %}
+              <li>
+                <img src="..//static/Dashboard/dashboard.png" />
+                <form action="/newPlaylist" method="post">
+                  <input
+                    type="hidden"
+                    name="pl_id"
+                    value="{{pl.Playlist_id}}"
+                  />
+                  <input
+                    style="
+                      background-color: rgba(255, 255, 255, 0.2);
+                      border: 1px solid grey;
+                      padding: 10px;
+                      border-radius: 8px;
+                    "
+                    type="submit"
+                    name="pl_name"
+                    value="{{pl.name}}"
+                  />
+                </form>
+              </li>
+              {% endfor %}
+
+              <li class="my_albums">
+                {% for my in creator_album %}
+                <form action="/creator/albums" method="post">
+                  <input hidden name="id_album" value="{{my.album_id}}" />
+                  <input
+                    style="
+                      background-color: rgba(255, 255, 255, 0.2);
+                      border: 1px solid grey;
+                      padding: 10px;
+                      border-radius: 8px;
+                    "
+                    type="submit"
+                    name="albumname"
+                    value="{{my.title}}"
+                  />
+                </form>
+
+                {% endfor %}
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <img src="..//static/Dashboard/logout.png" />
+                <a href="/userlogout" id="log">Logout</a>
+              </li>
+            </ul>
+          </div>
+          <!-- left side nav ends -->
+        </div>
+        <!-- left-header ends -->
+      </div>
+      <!-- left_layout ends-------------------------------------------------------------------------------------- -->
+
+      <!-- right_layout starts-------------------------------------------------------------------------------------- -->
+
+      <div
+        class="right_layout"
+        style="display: flex; flex-direction: column; align-items: center"
+      >
+        <!-- search div input start -->
+        <form class="search_form" action="/searched" method="post">
+          <div class="search-div">
+            <input
+              id="av"
+              onkeyup="search()"
+              placeholder="Search song/album by name,artists, genre etc."
+              class="search-bar"
+              type="search"
+              name="show_search"
+              method="post"
+            />
+            <input class="search_submit" type="submit" value="Search" />
+          </div>
+        </form>
+        <!-- search div input ends -->
+        <br />
+        <br />
+        <br />
+        <div
+          style="
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid grey;
+            padding: 10px;
+            border-radius: 8px;
+          "
+          class="upload_album"
+        >
+          Upload Playlist
+        </div>
+        <form action="/new_Playlist" method="post">
+          <p>Playlist Name</p>
+          <input
+            name="pli_name"
+            type="text"
+            style="
+              background: rgba(255, 255, 255, 0.2);
+              border-radius: 4px;
+              border: 1px solid grey;
+            "
+          />
+          <br />
+          <br />
+          <p>select a file</p>
+          <select name="song_name" id="">
+            {% for song in song %}
+            <option>{{song.title}}</option>
+            {% endfor %}
+          </select>
+          <br />
+          <br />
+          <input
+            style="
+              background: rgba(255, 255, 255, 0.2);
+              border-radius: 4px;
+              border: 1px solid grey;
+              padding: 10px;
+              font-size: 20px;
+            "
+            type="submit"
+            value="Create/Add Song to Playlist"
+          />
+        </form>
+      </div>
+
+      <!--  right main layout end-->
+    </div>
+    <!--  full layout end -->
+
+    <!-- script starts -->
+
+    <script></script>
+
+    <!-- script ends -->
+  </body>
+</html>

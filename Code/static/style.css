@@ -1,0 +1,254 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+    background-image: url("../static/background.png");
+    height: auto;
+}
+.left_layout {
+
+
+    position: fixed;
+    z-index: 1;
+
+}
+
+
+
+.header {
+    width: 100%;
+    height: 100vh;
+    /* position: fixed; */
+    background-position: center;
+    background-size: cover;
+}
+
+.side-nav {
+    width: 110px;
+    height: 100%;
+    /* position: fixed; */
+    top: 0;
+    left: 0;
+    padding: 30px 15px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    transition: width 0.5s;
+
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60px;
+    font-size: 12px;
+    padding: 10px;
+    border-radius: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+}
+
+.user div {
+    display: none;
+}
+
+.user h2 {
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.user-img {
+    width: 40px;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.star-img {
+    width: 20px;
+    display: none;
+}
+
+ul {
+    list-style: none;
+    padding: 0 15px;
+}
+
+ul li {
+    margin: 30px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+ul li img {
+    width: 30px;
+    margin-right: 0px;
+}
+
+ul li p {
+    white-space: nowrap;
+    display: none;
+}
+
+.side-nav:hover {
+    width: 250px;
+}
+
+.side-nav:hover .user div {
+    display: block;
+}
+
+.side-nav:hover .user {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+.side-nav:hover .star-img {
+    display: block;
+}
+
+.side-nav:hover .user-img {
+    margin: 0;
+}
+
+.side-nav:hover ul li p {
+    display: block;
+}
+
+.side-nav:hover ul li img {
+    margin-right: 10px;
+    justify-content: center;
+}
+
+.side-nav:hover ul li {
+
+    justify-content: flex-start;
+}
+
+/* right layout */
+
+.right_layout {
+    margin-left: 200px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    /* align-items: center; */
+    height: auto;
+    padding: 40px;
+    /* transition: width 0.5s; */
+
+    /* display: flex; */
+    height: auto;
+}
+
+.search_submit {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgb(66, 65, 64);
+    border-radius: 0px 45px 45px 0px;
+    padding: 5px;
+    border-left: 0px;
+}
+
+.search_form {
+    display: flex;
+    justify-content: center;
+}
+
+.search-div {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    align-self: center;
+
+}
+
+.search-bar {
+    padding: 10px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgb(66, 65, 64);
+    border-radius: 45px 0 0 45px;
+    font-size: 30px;
+
+}
+
+/* /--------songs----------\ */
+.oldSongs_mainLayout{
+    display: flex;
+    
+    justify-content: center;
+    /* backdrop-filter: blur(5px); */
+}
+
+.singleSongs_mainLayout{
+    padding: 40px;
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.2);
+    /* justify-content: center; */
+    backdrop-filter: blur(5px);
+    border-radius: 8px;
+}
+.left_mainLayout{
+    width: 50%;
+}
+
+.song_img {
+    width: 100%;
+    max-width: 250px;
+    max-height: 250px;
+    border-radius: 4px;
+    align-items: center;
+}
+
+.player {
+    /* display: block; */
+    width: 100%;
+    background-color: rgba(209, 29, 29, 0.2);
+    border-radius: 25px;
+    box-shadow: -3px 6px 7px #bebebe;
+    position: relative;
+
+}
+
+.player_common {
+    display: block;
+    width: 100%;
+    margin-top: -77vh;
+    position: fixed;
+    z-index: 1;
+}
+
+.rightSideFigure::-webkit-scrollbar {
+    width: 10px;
+    /* Set the width of the scrollbar */
+}
+
+.rightSideFigure::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    /* Set the color of the track (the area behind the scrollbar) */
+}
+
+.rightSideFigure::-webkit-scrollbar-thumb {
+    background-color: #ee6d6d;
+    backdrop-filter: blur(5px);
+    border-radius: 6px;
+    /* Set the color of the thumb (the draggable part of the scrollbar) */
+    /* Set the border radius of the thumb */
+}
+
+.rightSideFigure::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+    /* Set the color of the thumb on hover */
+}

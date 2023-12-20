@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign up</title>
+    
+  </head>
+  <body style="background-image: url(../static/background.png)">
+    <center>
+      <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+      <form action="/adduser" method="post">
+        <div style="display: block">
+          <label class="form-label" for="form3Example1c">Your Name</label>
+
+          <input
+            style="
+              background: rgba(255, 255, 255, 0.2);
+              border-radius: 4px;
+              border: 1px solid grey;
+            "
+            type="text"
+            id="form 3Example1c"
+            class="form-control"
+            name="user_name"
+          />
+        </div>
+
+        <br />
+        <br />
+
+        <div style="display: block">
+          <label class="form-label" for="form3Example3c">Your Email</label>
+          <input
+            style="
+              background: rgba(255, 255, 255, 0.2);
+              border-radius: 4px;
+              border: 1px solid grey;
+            "
+            type="email"
+            id="form 3Example3c"
+            class="form-control"
+            name="user_email"
+          />
+        </div>
+        <br />
+        <br />
+        <div style="display: block">
+          <label class="form-label" for="form3Example4c">Password</label>
+          <input
+            style="
+              background: rgba(255, 255, 255, 0.2);
+              border-radius: 4px;
+              border: 1px solid grey;
+            "
+            type="password"
+            id="form 3Example4c"
+            class="form-control"
+            name="user_password"
+          />
+        </div>
+        <br />
+        <br />
+
+        <div style="display: block">
+          <input style="
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 4px;
+          border: 1px solid grey;
+        "type="submit" />
+        </div>
+      </form>
+    </center>
+  </body>
+</html>

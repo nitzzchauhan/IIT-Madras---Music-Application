@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Song</title>
+    <link rel="stylesheet" href="../static/upload.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1 style="color: #0056b3">Upload a Song</h1>
+      <form action="/upload_song" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="songname" class="required">Name of the Song:</label>
+          <input type="text" name="songname" required class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="artistname">Name of Artists (Comma Separated):</label>
+          <input
+            type="text"
+            name="artistname" ub
+            placeholder="Artist1, Artist2"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="genre">Genres:</label>
+          <select id="genre" name="genre_name" class="form-control">
+            <option value="none">None</option>
+            <option value="pop">Pop</option>
+            <option value="rock">Rock</option>
+            <option value="hiphop">Hip-Hop</option>
+            <option value="jazz">Jazz</option>
+            <option value="country">Country</option>
+            <option value="electronic">Electronic</option>
+            <option value="rnb">R&B</option>
+            <option value="reggae">Reggae</option>
+            <option value="classical">Classical</option>
+            <option value="blues">Blues</option>
+            <option value="metal">Metal</option>
+            <option value="alternative">Alternative</option>
+            <option value="indie">Indie</option>
+            <option value="folk">Folk</option>
+            <option value="punk">Punk</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="album">Album:</label>
+          <select
+            name="album_name"
+            id="album"
+            class="form-control"
+            onchange="toggleAlbumInput()"
+          >
+            <option value="none">None</option>
+            <option value="new">Create a New Album</option>
+            {% for a in albums %}
+            <option value="{{a.album_name}}">{{a.album_name}}</option>
+            {% endfor %}
+          </select>
+          <input
+            type="text"
+            name="new_album_name"
+            id="newAlbumInput"
+            style="display: none"
+            placeholder="Give Name for Album"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="lyrics">Lyrics for the Song:</label>
+          <textarea
+            name="lyrics"
+            id="lyrics"
+            rows="5"
+            cols="40"
+            class="form-control"
+          ></textarea>
+        </div>
+        <div class="form-group file-input">
+          <label for="songfile" class="required">Select Song (MP3 only):</label>
+          <input
+            type="file"
+            name="file"
+            accept=".mp3"
+            required
+            class="form-control"
+          />
+          <!-- <p>Drag and drop your file here or click to select.</p> -->
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Upload" class="btn btn-primary" />
+        </div>
+      </form>
+    </div>
+    <script>
+      function toggleAlbumInput() {
+        var albumDropdown = document.getElementById("album");
+        var newAlbumInput = document.getElementById("newAlbumInput");
+
+        if (albumDropdown.value === "new") {
+          newAlbumInput.style.display = "block";
+        } else {
+          newAlbumInput.style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>

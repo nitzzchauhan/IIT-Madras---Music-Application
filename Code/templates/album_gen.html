@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Songs</title>
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+  <body>
+    <!-- full layout start -->
+    <div class="full_layout">
+      <!-- left layout start-------------------------------------------------------------------- -->
+      <div class="left_layout">
+        <!-- left layout starts -->
+        <div class="header">
+          <!-- left side-navbar starts -->
+          <div class="side-nav">
+            <!-- div class user -->
+            <div class="user">
+              <div>
+                
+                <p>{{useremail}}</p>
+              </div>
+              <img src="..//static/Dashboard/star.png" class="star-img" />
+            </div>
+            <!-- div class user ends -->
+            <h4>All Albums</h4>
+            <ul style="overflow: auto">
+              <li>
+                <img src="..//static/Dashboard/dashboard.png" />
+                <a href="/home"><p>Dashboard</p></a>
+              </li>
+                {% for album in albums %}
+              <li>
+                <img src="..//static/Dashboard/dashboard.png" />
+                <form action="/home/album" method="post"><input hidden name="id_album" value={{album.album_id}}> <input type="submit" name="albumname" value={{album.title}}></form>
+              </li>            
+              {% endfor %}
+             
+            </ul>
+            <ul>
+              <li>
+                <img src="..//static/Dashboard/logout.png" />
+                <a href="/userlogout" id="log">Logout</a>
+              </li>
+            </ul>
+          </div>
+          <!-- left side nav ends -->
+        </div>
+        <!-- left-header ends -->
+      </div>
+      <!-- left_layout ends-------------------------------------------------------------------------------------- -->
+
+      <!-- right_layout starts-------------------------------------------------------------------------------------- -->
+
+      <div class="right_layout">
+        <!-- search div input start -->
+        <form class="search_form" action="/searched" method="post">
+          <div class="search-div">
+            <input
+              id="av"
+              onkeyup="search()"
+              placeholder="Search song/album by name,artists, genre etc."
+              class="search-bar"
+              type="search"
+              name="show_search"
+              method="post"
+            />
+            <input class="search_submit" type="submit" value="Search" />
+          </div>
+        </form>
+        <!-- search div input ends -->
+       
+        <!-- all song maain layout starts -->
+        <div class="allSongs_mainLayout" id="allsongs">
+          {% for y in song %}
+          <ul>
+            <li>
+              <div class="singleSongs_mainLayout">
+                <!-- left_mainLayout start -->
+                <div class="left_mainLayout">
+                  <div class="song_img_div">
+                    <img
+                      src="../static/songs/song_img/first.jpeg"
+                      class="song_img"
+                    />
+                  </div>
+
+                  <div class="song_name_div">
+                    <h6 id="ro">{{y.title}}</h6>
+                    <h4>{{y.title}} by {{y.artist}}</h4>
+                    <h5>Album:{{y.album}} + {{y.path}}</h5>
+                    <audio controls class="player">
+                      <source
+                        src="../static/allsongs{{y.path}}"
+                        type="audio/mp3"
+                      />
+                    </audio>
+                  </div>
+                </div>
+                <!-- left_mainLayout end -->
+                <div class="right_mainLayout">
+                  <!-- right_mainLayout start -->
+                  <div
+                    class="rightSideFigure"
+                    style="margin-left: 15px; height: 250px; overflow: auto"
+                  >
+                    <pre>{{y.lyrics}}</pre>
+                  </div>
+                  <br />
+                  <br />
+                  <div class="rightSideFigureForm" style="margin-left: 15px">
+                    
+                    <br /><br />
+                    <form
+                    action="{{ url_for('asp', song_id=y.song_id,) }}" method="post"
+                    >
+                      <label for="rating"><h4>Add to playlist</h4></label>
+                      <input
+                        type="text"
+                        hidden
+                        name="sId"
+                        value="{{y.song_id}}"
+                      />
+
+                      <select
+                        style="
+                          background-color: rgba(255, 255, 255, 0.2);
+                          border: 1px solid grey;
+                          padding: 10px;
+                          border-radius: 8px;
+                        "
+                        name="sp"
+                        id="sp"
+                      >
+                        {% for playlist in all_playlist %}
+                        <option value="{{playlist.name}}">
+                          {{playlist.name}}
+                          <!-- <input
+                            type="text"
+                            hidden
+                            name="pId"
+                            value="{{playlist.Playlist_id}}"
+                          /> -->
+                        </option>
+
+                        {% endfor %}
+
+                        <input
+                          style="
+                            background-color: rgba(255, 255, 255, 0.2);
+                            border: 1px solid grey;
+                            padding: 10px;
+                            border-radius: 8px;
+                          "
+                          type="submit"
+                          value="Add"
+                        />
+                      </select>
+                    </form>
+                  </div>
+                </div>
+
+                <!-- right_mainLayout end -->
+              </div>
+              <!-- single song maain layout ends -->
+            </li>
+          </ul>
+          <br />
+          <br />
+          <br />
+          <br />
+          {% endfor %}
+        </div>
+        <!-- all song maain layout ends -->
+      </div>
+      <!--  right main layout end-->
+    </div>
+    <!--  full layout end -->
+
+    <!-- script starts -->
+
+    <script>
+   
+    </script>
+
+    <!-- script ends -->
+  </body>
+</html>
